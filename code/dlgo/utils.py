@@ -1,4 +1,3 @@
-import numpy as np
 # tag::print_utils[]
 from dlgo import gotypes
 

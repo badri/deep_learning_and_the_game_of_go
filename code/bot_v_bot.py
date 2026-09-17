@@ -1,10 +1,10 @@
-from __future__ import print_function
 # tag::bot_vs_bot[]
-from dlgo.agent.naive import RandomBot
-from dlgo import goboard_slow as goboard
-from dlgo import gotypes
-from dlgo.utils import print_board, print_move
 import time
+
+from dlgo import goboard
+from dlgo import gotypes
+from dlgo.agent.naive import RandomBot
+from dlgo.utils import print_board, print_move
 
 
 def main():
@@ -22,6 +22,9 @@ def main():
         bot_move = bots[game.next_player].select_move(game)
         print_move(game.next_player, bot_move)
         game = game.apply_move(bot_move)
+
+    print_board(game.board)
+    print('Winner: %s' % game.winner())
 
 
 if __name__ == '__main__':

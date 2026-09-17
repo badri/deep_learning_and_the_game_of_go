@@ -1,4 +1,3 @@
-import numpy as np
 # tag::imports[]
 import copy
 from dlgo.gotypes import Player
@@ -227,6 +226,7 @@ class GameState():
         if move.is_pass or move.is_resign:
             return True
         return (
+            self.board.is_on_grid(move.point) and
             self.board.get(move.point) is None and
             not self.is_move_self_capture(self.next_player, move) and
             not self.does_move_violate_ko(self.next_player, move))
@@ -243,3 +243,10 @@ class GameState():
             return False
         return self.last_move.is_pass and second_last_move.is_pass
 # end::is_over[]
+
+    def winner(self):
+        if not self.is_over():
+            return None
+        if self.last_move.is_resign:
+            return self.next_player
+        return compute_game_result(self).winner

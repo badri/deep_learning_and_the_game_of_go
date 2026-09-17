@@ -1,0 +1,18 @@
+[build-system]
+requires = ["setuptools>=61"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "dlgo"
+version = "0.1"
+description = "Deep Learning and the Game of Go - chapter 3 code"
+requires-python = ">=3.9"
+license = { text = "MIT" }
+# Chapter 3 is pure standard library: no numpy, TensorFlow, Keras, six or future.
+dependencies = []
+
+[project.urls]
+Homepage = "https://github.com/maxpumperla/deep_learning_and_the_game_of_go"
+
+[tool.setuptools.packages.find]
+include = ["dlgo*"]

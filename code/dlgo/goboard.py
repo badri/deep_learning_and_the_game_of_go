@@ -88,7 +88,6 @@ class Board:
             else:
                 if neighbor_string not in adjacent_opposite_color:
                     adjacent_opposite_color.append(neighbor_string)
-        new_string = GoString(player, [point], liberties)
 # tag::apply_zobrist[]
         new_string = GoString(player, [point], liberties)  # <1>
 
@@ -164,7 +163,10 @@ class Board:
         return isinstance(other, Board) and \
             self.num_rows == other.num_rows and \
             self.num_cols == other.num_cols and \
-            self._hash() == other._hash()
+            self._hash == other._hash
+
+    def __hash__(self):
+        return self._hash
 
     def __deepcopy__(self, memodict={}):
         copied = Board(self.num_rows, self.num_cols)
@@ -271,6 +273,7 @@ class GameState:
         if move.is_pass or move.is_resign:
             return True
         return (
+            self.board.is_on_grid(move.point) and
             self.board.get(move.point) is None and
             not self.is_move_self_capture(self.next_player, move) and
             not self.does_move_violate_ko(self.next_player, move))
